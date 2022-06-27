@@ -17,12 +17,24 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     ParseClientConfiguration *config = [ParseClientConfiguration  configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
 
-        configuration.applicationId = @"OnZ5icEAnBQGgs2fZZsRrPmKG6IT9TpPYaNQu5Kg"; 
+        configuration.applicationId = @"OnZ5icEAnBQGgs2fZZsRrPmKG6IT9TpPYaNQu5Kg";
         configuration.clientKey = @"pawBAdtW87fd5Jn1eWZl372BGcX6Gf4NXUkwyaZB";
         configuration.server = @"https://parseapi.back4app.com";
     }];
 
     [Parse initializeWithConfiguration:config];
+    
+    PFObject *parseTest = [PFObject objectWithClassName:@"ParseTest"];
+    parseTest[@"yearBorn"] = @2003;
+    parseTest[@"givenName"] = @"Maize";
+    parseTest[@"greatPerson"] = @NO;
+    [parseTest saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"Object saved!");
+        } else {
+            NSLog(@"Error: %@", error.description);
+        }
+    }];
 
     return YES;
 }
