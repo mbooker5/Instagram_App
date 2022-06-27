@@ -24,17 +24,6 @@
 
     [Parse initializeWithConfiguration:config];
     
-    PFObject *parseTest = [PFObject objectWithClassName:@"ParseTest"];
-    parseTest[@"yearBorn"] = @2003;
-    parseTest[@"givenName"] = @"Maize";
-    parseTest[@"greatPerson"] = @NO;
-    [parseTest saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            NSLog(@"Object saved!");
-        } else {
-            NSLog(@"Error: %@", error.description);
-        }
-    }];
 
     return YES;
 }
