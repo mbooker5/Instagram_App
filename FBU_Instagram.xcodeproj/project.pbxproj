@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		5C99EEF9AFEDD18EAC113A88 /* libPods-FBU_InstagramUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E19EF225350B04527541C37E /* libPods-FBU_InstagramUITests.a */; };
 		6993E9EC286A623E0021E6E7 /* HomeFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6993E9EB286A623E0021E6E7 /* HomeFeedViewController.m */; };
+		6993E9F1286B73CA0021E6E7 /* PhotoMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6993E9F0286B73CA0021E6E7 /* PhotoMapViewController.m */; };
+		6993E9F7286B97410021E6E7 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 6993E9F6286B97410021E6E7 /* Post.m */; };
 		69F088F3286A48B600DB983D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F088F2286A48B600DB983D /* AppDelegate.m */; };
 		69F088F6286A48B600DB983D /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F088F5286A48B600DB983D /* SceneDelegate.m */; };
 		69F088FC286A48B600DB983D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69F088FA286A48B600DB983D /* Main.storyboard */; };
@@ -49,6 +51,10 @@
 		65A9EBC2C7374452B3797C63 /* Pods-FBU_InstagramTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FBU_InstagramTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FBU_InstagramTests/Pods-FBU_InstagramTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6993E9EA286A623E0021E6E7 /* HomeFeedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeFeedViewController.h; sourceTree = "<group>"; };
 		6993E9EB286A623E0021E6E7 /* HomeFeedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeFeedViewController.m; sourceTree = "<group>"; };
+		6993E9EF286B73CA0021E6E7 /* PhotoMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoMapViewController.h; sourceTree = "<group>"; };
+		6993E9F0286B73CA0021E6E7 /* PhotoMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoMapViewController.m; sourceTree = "<group>"; };
+		6993E9F5286B97410021E6E7 /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
+		6993E9F6286B97410021E6E7 /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		69F088EE286A48B600DB983D /* FBU_Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FBU_Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69F088F1286A48B600DB983D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		69F088F2286A48B600DB983D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -116,6 +122,10 @@
 				69F08927286A5DA200DB983D /* LoginViewController.m */,
 				6993E9EA286A623E0021E6E7 /* HomeFeedViewController.h */,
 				6993E9EB286A623E0021E6E7 /* HomeFeedViewController.m */,
+				6993E9EF286B73CA0021E6E7 /* PhotoMapViewController.h */,
+				6993E9F0286B73CA0021E6E7 /* PhotoMapViewController.m */,
+				6993E9F5286B97410021E6E7 /* Post.h */,
+				6993E9F6286B97410021E6E7 /* Post.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -405,11 +415,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6993E9F1286B73CA0021E6E7 /* PhotoMapViewController.m in Sources */,
 				6993E9EC286A623E0021E6E7 /* HomeFeedViewController.m in Sources */,
 				69F08928286A5DA200DB983D /* LoginViewController.m in Sources */,
 				69F088F3286A48B600DB983D /* AppDelegate.m in Sources */,
 				69F08904286A48B700DB983D /* main.m in Sources */,
 				69F088F6286A48B600DB983D /* SceneDelegate.m in Sources */,
+				6993E9F7286B97410021E6E7 /* Post.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,6 +598,7 @@
 				DEVELOPMENT_TEAM = TGXV9BWRL4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FBU_Instagram/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Instagram;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -614,6 +627,7 @@
 				DEVELOPMENT_TEAM = TGXV9BWRL4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FBU_Instagram/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Instagram;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

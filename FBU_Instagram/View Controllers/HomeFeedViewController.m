@@ -43,4 +43,9 @@
     
 }
 
+- (IBAction)didTapPost:(id)sender {
+    [self performSegueWithIdentifier:@"postSegue" sender:nil];
+}
+
+
 @end
