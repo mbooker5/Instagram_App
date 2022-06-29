@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Parse/Parse.h"
+#import "HomeFeedCell.h"
 NS_ASSUME_NONNULL_BEGIN
 // Add UITableViewDelegate, UITableViewDataSource
 @interface HomeFeedViewController : UIViewController

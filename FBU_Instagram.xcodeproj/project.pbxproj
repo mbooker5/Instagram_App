@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,7 @@
 		6993E9EC286A623E0021E6E7 /* HomeFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6993E9EB286A623E0021E6E7 /* HomeFeedViewController.m */; };
 		6993E9F1286B73CA0021E6E7 /* PhotoMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6993E9F0286B73CA0021E6E7 /* PhotoMapViewController.m */; };
 		6993E9F7286B97410021E6E7 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 6993E9F6286B97410021E6E7 /* Post.m */; };
+		6993E9FA286CBD140021E6E7 /* HomeFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6993E9F9286CBD140021E6E7 /* HomeFeedCell.m */; };
 		69F088F3286A48B600DB983D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F088F2286A48B600DB983D /* AppDelegate.m */; };
 		69F088F6286A48B600DB983D /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F088F5286A48B600DB983D /* SceneDelegate.m */; };
 		69F088FC286A48B600DB983D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69F088FA286A48B600DB983D /* Main.storyboard */; };
@@ -55,6 +56,8 @@
 		6993E9F0286B73CA0021E6E7 /* PhotoMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoMapViewController.m; sourceTree = "<group>"; };
 		6993E9F5286B97410021E6E7 /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		6993E9F6286B97410021E6E7 /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		6993E9F8286CBD140021E6E7 /* HomeFeedCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeFeedCell.h; sourceTree = "<group>"; };
+		6993E9F9286CBD140021E6E7 /* HomeFeedCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeFeedCell.m; sourceTree = "<group>"; };
 		69F088EE286A48B600DB983D /* FBU_Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FBU_Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69F088F1286A48B600DB983D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		69F088F2286A48B600DB983D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -124,8 +127,6 @@
 				6993E9EB286A623E0021E6E7 /* HomeFeedViewController.m */,
 				6993E9EF286B73CA0021E6E7 /* PhotoMapViewController.h */,
 				6993E9F0286B73CA0021E6E7 /* PhotoMapViewController.m */,
-				6993E9F5286B97410021E6E7 /* Post.h */,
-				6993E9F6286B97410021E6E7 /* Post.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -139,6 +140,24 @@
 				69F088F5286A48B600DB983D /* SceneDelegate.m */,
 			);
 			path = Delegates;
+			sourceTree = "<group>";
+		};
+		6993E9FB286CBD1A0021E6E7 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				6993E9F8286CBD140021E6E7 /* HomeFeedCell.h */,
+				6993E9F9286CBD140021E6E7 /* HomeFeedCell.m */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		6993E9FC286CBD300021E6E7 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				6993E9F5286B97410021E6E7 /* Post.h */,
+				6993E9F6286B97410021E6E7 /* Post.m */,
+			);
+			path = Objects;
 			sourceTree = "<group>";
 		};
 		69F088E5286A48B600DB983D = {
@@ -167,7 +186,9 @@
 			isa = PBXGroup;
 			children = (
 				69F088FA286A48B600DB983D /* Main.storyboard */,
+				6993E9FB286CBD1A0021E6E7 /* Cells */,
 				6993E9EE286A626B0021E6E7 /* Delegates */,
+				6993E9FC286CBD300021E6E7 /* Objects */,
 				6993E9ED286A624E0021E6E7 /* View Controllers */,
 				69F088FD286A48B700DB983D /* Assets.xcassets */,
 				69F088FF286A48B700DB983D /* LaunchScreen.storyboard */,
@@ -344,10 +365,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-FBU_Instagram/Pods-FBU_Instagram-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/Parse/Parse.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/Parse/ParseUI.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Parse.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ParseUI.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -421,6 +444,7 @@
 				69F088F3286A48B600DB983D /* AppDelegate.m in Sources */,
 				69F08904286A48B700DB983D /* main.m in Sources */,
 				69F088F6286A48B600DB983D /* SceneDelegate.m in Sources */,
+				6993E9FA286CBD140021E6E7 /* HomeFeedCell.m in Sources */,
 				6993E9F7286B97410021E6E7 /* Post.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

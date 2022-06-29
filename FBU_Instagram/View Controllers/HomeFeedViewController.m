@@ -9,15 +9,43 @@
 #import "LoginViewController.h"
 #import "SceneDelegate.h"
 
-@interface HomeFeedViewController ()
-
+@interface HomeFeedViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSArray *arrayOfPosts;
 @end
 
 @implementation HomeFeedViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
     // Do any additional setup after loading the view.
+    [self getPosts];
+    [self.tableView reloadData];
+}
+
+-(void)getPosts{
+    // construct PFQuery
+    PFQuery *postQuery = [Post query];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery includeKey:@"author"];
+    postQuery.limit = 20;
+
+    // fetch data asynchronously
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+        if (posts) {
+            // do something with the data fetched
+//            self.postUsername = postQuery[author];
+//
+            self.arrayOfPosts = posts;
+        }
+        else {
+            // handle error
+        }
+        [self.tableView reloadData];
+    }];
+    
 }
 
 /*
@@ -29,6 +57,23 @@
     // Pass the selected object to the new view controller.
 }
 */
+// Returns the number of rows for the table.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section { //required method from UITableViewDataSource
+    return self.arrayOfPosts.count; // # of cells
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{ //required method from UITableViewDataSource
+    HomeFeedCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"HomeFeedCell" forIndexPath:indexPath]; //class constructor
+    
+    Post *post = self.arrayOfPosts[indexPath.row];
+    cell.post = post;
+    [cell setPost];
+//    [cell refreshData];
+    
+    return cell;
+}
+
+
 - (IBAction)didTapLogout:(id)sender {
     SceneDelegate *sceneDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
 

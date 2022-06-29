@@ -9,9 +9,9 @@
 
 @interface PhotoMapViewController ()
 @property (strong, nonatomic) IBOutlet UIButton *imageSelector;
-@property (strong, nonatomic) IBOutlet UIImageView *imageToPost;
-@property (strong, nonatomic) IBOutlet UITextField *captionToPost;
+
 @end
+
 
 @implementation PhotoMapViewController
 
@@ -44,8 +44,14 @@
 - (IBAction)didTapCancel:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];
 }
+
 - (IBAction)didTapShare:(id)sender {
+    [Post postUserImage:_imageToPost.image withCaption:_captionToPost.text withCompletion:^(BOOL succeeded, NSError * _Nullable error){
+        [self dismissViewControllerAnimated:YES completion:nil];
+        NSLog(@"Post shared successfully!");
+    }];
 }
+
 - (IBAction)didTapImage:(id)sender {
     
     
@@ -83,6 +89,8 @@
     [self presentViewController:alert animated:YES completion:nil];
     
 }
+
+
 
 
 

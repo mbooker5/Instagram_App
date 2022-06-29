@@ -7,6 +7,8 @@
 
 #import "PFObject.h"
 #import "Parse/Parse.h"
+#import "PhotoMapViewController.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Post : PFObject<PFSubclassing>
