@@ -8,6 +8,7 @@
 #import "HomeFeedViewController.h"
 #import "LoginViewController.h"
 #import "SceneDelegate.h"
+#import "PostDetailsViewController.h"
 
 @interface HomeFeedViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -20,55 +21,60 @@
     [super viewDidLoad];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    // Do any additional setup after loading the view.
+ 
     [self getPosts];
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:refreshControl atIndex:0];
     [self.tableView reloadData];
 }
 
 -(void)getPosts{
-    // construct PFQuery
+
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
     postQuery.limit = 20;
 
-    // fetch data asynchronously
+  
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
         if (posts) {
-            // do something with the data fetched
-//            self.postUsername = postQuery[author];
-//
             self.arrayOfPosts = posts;
         }
         else {
-            // handle error
         }
         [self.tableView reloadData];
     }];
     
 }
 
-/*
-#pragma mark - Navigation
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    [self getPosts];
+    [refreshControl endRefreshing];
+    [self.tableView reloadData];
+    
+}
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-// Returns the number of rows for the table.
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section { //required method from UITableViewDataSource
-    return self.arrayOfPosts.count; // # of cells
+    if ([[segue identifier] isEqualToString:@"details"]){
+        NSIndexPath *myIndexPath = [self.tableView indexPathForCell:sender];
+        Post *dataToPass = self.arrayOfPosts[myIndexPath.row];
+        PostDetailsViewController *vc = [segue destinationViewController];
+        vc.post = dataToPass;
+    }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{ //required method from UITableViewDataSource
-    HomeFeedCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"HomeFeedCell" forIndexPath:indexPath]; //class constructor
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.arrayOfPosts.count; //
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    HomeFeedCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"HomeFeedCell" forIndexPath:indexPath]; 
     
     Post *post = self.arrayOfPosts[indexPath.row];
     cell.post = post;
     [cell setPost];
-//    [cell refreshData];
+
     
     return cell;
 }
@@ -82,7 +88,7 @@
     sceneDelegate.window.rootViewController = loginViewController;
     
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-        // PFUser.current() will now be nil
+
     }];
     NSLog(@"User logged out successfully");
     
@@ -91,6 +97,8 @@
 - (IBAction)didTapPost:(id)sender {
     [self performSegueWithIdentifier:@"postSegue" sender:nil];
 }
+
+
 
 
 @end

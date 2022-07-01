@@ -1,53 +1,52 @@
 //
-//  PhotoMapViewController.m
+//  ProfileViewController.m
 //  FBU_Instagram
 //
-//  Created by Maize Booker on 6/28/22.
+//  Created by Maize Booker on 6/30/22.
 //
 
-#import "PhotoMapViewController.h"
+#import "ProfileViewController.h"
+#import "HomeFeedCell.h"
+#import "UIImageView+AFNetworking.h"
+#import "PFObject.h"
+#import "Post.h"
 
-@interface PhotoMapViewController ()
-@property (strong, nonatomic) IBOutlet UIButton *imageSelector;
+
+@interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end
 
-
-@implementation PhotoMapViewController
+@implementation ProfileViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    PFUser *user = PFUser.currentUser;
+    PFFileObject *avatarfileObject = user[@"profilePicture"];
+    [avatarfileObject getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+            self.userProfilePicture.image = [UIImage imageWithData:data];
+    }];
+    
+    self.userUsername.text = user.username;
+    
 }
 
-
-
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    // Get the image captured by the UIImagePickerController
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
-    _imageToPost.image = originalImage;
+//    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+    // Do something with the images (based on your use case)
+    _userProfilePicture.image = originalImage;
+    PFUser.currentUser[@"profilePicture"] = [Post getPFFileFromImage:originalImage];
+    [PFUser.currentUser saveInBackground];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)didTapCancel:(id)sender {
-    [self dismissViewControllerAnimated:true completion:nil];
-}
-
-- (IBAction)didTapShare:(id)sender {
-    [Post postUserImage:_imageToPost.image withCaption:_captionToPost.text withCompletion:^(BOOL succeeded, NSError * _Nullable error){
-        [self dismissViewControllerAnimated:YES completion:nil];
-        NSLog(@"Post shared successfully!");
-    }];
-}
-
-- (IBAction)didTapImage:(id)sender {
-    
-    
+- (IBAction)didTapProfilePicture:(id)sender {
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
     
 
-   
     
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Upload Image"
                                    message:@""
@@ -76,9 +75,6 @@
     [self presentViewController:alert animated:YES completion:nil];
     
 }
-
-
-
 
 
 @end

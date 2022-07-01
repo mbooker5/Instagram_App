@@ -31,16 +31,16 @@
     newPost.commentCount = @(0);
     
     [newPost saveInBackgroundWithBlock: completion];
+    
 }
 
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
  
-    // check if image is not nil
     if (!image) {
         return nil;
     }
     
-    CGSize size = CGSizeMake(300.0, 300.0);
+    CGSize size = CGSizeMake(414.0, 345.0);
     image = [self resizeImage:image withSize:size];
     NSData *imageData = UIImagePNGRepresentation(image);
     // get image data and check if that is not nil
